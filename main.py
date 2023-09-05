@@ -1,19 +1,45 @@
-from utils import *
+import pandas as pd
+import matplotlib.pyplot as plt
+from utils import add_full_name, add_age_group, merge_data, \
+    calculate_total_spending_by_age, export_visualize_spending
+import multiprocessing
+
+
+def parallelize_data_processing(data, function):
+    # Split the data into chunks for parallel processing
+    chunk_size = 1000
+    chunks = [data[i:i + chunk_size] for i in range(0, len(data), chunk_size)]
+    num_processes = multiprocessing.cpu_count()
+
+    # Create a pool of worker processes
+    pool = multiprocessing.Pool(processes=num_processes)
+
+    # Apply the function to each chunk in parallel
+    results = pool.map(function, chunks)
+
+    # Close the pool and wait for all processes to finish
+    pool.close()
+    pool.join()
+
+    # Combine the results from all chunks
+    return pd.concat(results, ignore_index=True)
+
 
 if __name__ == '__main__':
-    # Input file paths
-    customers_file = 'customers.csv'
-    purchases_file = 'purchases.csv'
 
-    # Load data from CSV files
-    customers = pd.read_csv(customers_file)
-    purchases = pd.read_csv(purchases_file)
+    # Load customer and purchase data
+    customers = pd.read_csv('customers.csv')
+    purchases = pd.read_csv('purchases.csv')
 
-    # Add a 'full_name' column
-    customers = add_full_name(customers)
+    # Define data processing functions
+    data_processing_functions = [
+        add_full_name,
+        add_age_group,
+    ]
 
-    # Add an 'age_group' column
-    customers = add_age_group(customers)
+    # Parallelize data processing for 'full_name' and 'age_group' columns
+    for func in data_processing_functions:
+        customers = parallelize_data_processing(customers, func)
 
     # Merge customer and purchase data
     merged_data = merge_data(customers, purchases)

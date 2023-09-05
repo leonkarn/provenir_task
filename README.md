@@ -1,5 +1,22 @@
 # Technical Challenge for Data Engineer Role
 
+
+## Solution
+To run this either use Docker in this way. After having installed it simply run the command below to build and run the image
+~~~
+docker-compose build && docker-compose up
+~~~
+
+Or alternatively if you have installed python , just run
+~~~
+pip install -r requirements.txt
+~~~
+to install the depedencies and after
+~~~
+python main.py
+~~~
+To run the script
+
 ## Overview
 
 In this challenge, you will be provided with two datasets, `customers.csv` and `purchases.csv`. Your primary task is to process, transform, and analyze these datasets using your choice of tools and languages. While Python, Pandas, and other relevant libraries are suggested, you're free to use any stack you're comfortable with. The goal is to extract meaningful insights and produce a visualization that showcases the spending habits of different age groups.

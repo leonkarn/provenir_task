@@ -17,6 +17,8 @@ python main.py
 ~~~
 To run the script
 
+The results are saved in results folder
+
 ## Overview
 
 In this challenge, you will be provided with two datasets, `customers.csv` and `purchases.csv`. Your primary task is to process, transform, and analyze these datasets using your choice of tools and languages. While Python, Pandas, and other relevant libraries are suggested, you're free to use any stack you're comfortable with. The goal is to extract meaningful insights and produce a visualization that showcases the spending habits of different age groups.

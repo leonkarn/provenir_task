@@ -43,12 +43,12 @@ if __name__ == '__main__':
 
     # Merge customer and purchase data
     merged_data = merge_data(customers, purchases)
-    merged_data.to_csv("combined_data.csv")
+    merged_data.to_csv("results/combined_data.csv")
 
     # Calculate total spending by age group
     spending_by_age = calculate_total_spending_by_age(merged_data)
-    spending_by_age.to_csv("age_group_spending.csv")
+    spending_by_age.to_csv("results/age_group_spending.csv")
 
     # Visualize spending by age group
     export_visualize_spending(spending_by_age)
-    plt.savefig("total_spending_by_age_group.png")
+    plt.savefig("results/total_spending_by_age_group.png")
